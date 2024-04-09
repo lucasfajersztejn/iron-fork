@@ -1,47 +1,55 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-const categories = require('../data/categories.json');
+const categories = require("../data/categories.json");
 
 const restaurantSchema = new Schema(
   {
     name: {
       type: String,
-      required: 'Name is required'
+      required: "Name is required",
     },
     category: {
       type: String,
       enum: categories,
-      required: 'Category is required'
+      required: "Category is required",
     },
     tables: {
       type: Number,
-      min: [1, 'Minimum number of tables are 1'],
-      max: [100, 'Maximum number of tables are 100'],
-      required: 'Amount of tables are required'
+      min: [1, "Minimum number of tables are 1"],
+      max: [100, "Maximum number of tables are 100"],
+      required: "Amount of tables are required",
     },
     avgPrice: Number,
     address: {
       type: String,
-      required: 'Address is required'
+      required: "Address is required",
     },
     location: {
       type: {
         type: String,
-        enum: ['Point'],
-        required: true
+        enum: ["Point"],
+        required: true,
       },
       coordinates: {
         type: [Number],
-        required: true
-      }
-    }
+        required: true,
+      },
+    },
   },
-  { 
-    timestamps: true
+  {
+    timestamps: true,
+    toJSON: {
+      transform: (doc, ret) => {
+        ret.id = ret._id;
+        delete ret._id;
+        delete ret.__v;
+        return ret;
+      },
+    },
   }
 );
 
-restaurantSchema.index({ location: '2dsphere' });
+restaurantSchema.index({ location: "2dsphere" });
 
-const Restaurant = mongoose.model('Restaurant', restaurantSchema);
+const Restaurant = mongoose.model("Restaurant", restaurantSchema);
 module.exports = Restaurant;
