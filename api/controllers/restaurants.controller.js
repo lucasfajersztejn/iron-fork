@@ -26,6 +26,7 @@ module.exports.list = (req, res, next) => {
 
 module.exports.detail = (req, res, next) => {
   Restaurant.findById(req.params.id)
+    .populate("comments")
     .then((restaurant) => {
       if (restaurant) {
         res.json(restaurant);

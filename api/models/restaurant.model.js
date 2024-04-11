@@ -39,6 +39,7 @@ const restaurantSchema = new Schema(
   {
     timestamps: true,
     toJSON: {
+      virtuals: true,
       transform: (doc, ret) => {
         ret.id = ret._id;
         delete ret._id;
@@ -48,6 +49,13 @@ const restaurantSchema = new Schema(
     },
   }
 );
+
+restaurantSchema.virtual("comments", {
+  ref: "Comment",
+  localField: "_id",
+  foreignField: "restaurant",
+  justOne: false,
+});
 
 restaurantSchema.index({ location: "2dsphere" });
 
