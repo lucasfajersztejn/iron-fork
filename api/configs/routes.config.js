@@ -14,5 +14,6 @@ router.post("/restaurants/:id/comments", comments.create);
 router.get("/restaurants/:id/comments", comments.list);
 
 router.post("/users", users.create);
+router.post("/login", users.login);
 
 module.exports = router;

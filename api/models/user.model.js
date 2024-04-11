@@ -68,7 +68,7 @@ schema.pre("save", function (next) {
 });
 
 schema.method("checkPassword", function (password) {
-  return bcrypt.compare(this.password, password);
+  return bcrypt.compare(password, this.password);
 });
 
 const User = mongoose.model("User", schema);
