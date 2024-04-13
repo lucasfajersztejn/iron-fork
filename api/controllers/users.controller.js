@@ -29,7 +29,7 @@ module.exports.login = (req, res, next) => {
                   sub: user.id,
                   exp: Date.now() / 1000 + 20,
                 },
-                "123"
+                process.env.JWT_SECRET
               );
 
               res.json({ accessToken });
