@@ -17,6 +17,10 @@ const schema = new Schema(
       type: Schema.Types.ObjectId,
       ref: "Restaurant",
     },
+    author: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+    },
   },
   {
     timestamps: true,
