@@ -2,10 +2,30 @@ const jwt = require("jsonwebtoken");
 const User = require("../models/user.model");
 
 module.exports.checkAuth = (req, res, next) => {
+  console.log(req.headers);
   // 1 - extract JWT from Authorization Header
+  const token = req.headers?.authorization;
   // 2 - verify JWT signature (jwt.verify)
-  // 3 - extract "sub" from jwt payload
-  // 4 - load user from databse
-  // 5 - save user on request (req.user)
-  // 6 - next
+  jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+    if (err) {
+      return res.status(401).json({ message: err.message });
+    }
+
+    // 3 - extract "sub" from jwt payload
+    const sub = decoded.sub;
+
+    // 4 - load user from databse
+    User.findById(sub)
+      .then((user) => {
+        if (user) {
+          // 5 - save user on request (req.user)
+          req.user = user;
+          // 6 - next
+          next();
+        } else {
+          res.status(401).json({ message: "Unauthorized" });
+        }
+      })
+      .catch(next);
+  });
 };

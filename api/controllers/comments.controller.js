@@ -7,6 +7,7 @@ module.exports.list = (req, res, next) => {
     restaurant: req.params.id,
   })
     .populate("restaurant")
+    .populate("author")
     .then((comments) => {
       res.json(comments);
     })
@@ -20,6 +21,7 @@ module.exports.create = (req, res, next) => {
         Comment.create({
           ...req.body,
           restaurant: req.params.id,
+          author: req.user.id,
         })
           .then((comment) => {
             res.json(comment);
