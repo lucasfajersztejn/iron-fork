@@ -7,3 +7,7 @@ const http = axios.create({
 export function createUser(data) {
   return http.post("/users", data);
 }
+
+export function login(data) {
+  return http.post("/login", data);
+}

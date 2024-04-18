@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { createUser } from "../services/api.service";
 
 function Register() {
   const navigate = useNavigate();
+  const latitude = useRef(0);
+  const longitude = useRef(0);
 
   const {
     register,
@@ -12,6 +14,13 @@ function Register() {
     formState: { errors },
   } = useForm();
   const [error, setError] = useState();
+
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition((position) => {
+      latitude.current = position.coords.latitude;
+      longitude.current = position.coords.longitude;
+    });
+  }, []);
 
   async function onSubmit(data) {
     try {
@@ -21,7 +30,7 @@ function Register() {
         ...data,
         location: {
           type: "Point",
-          coordinates: [0, 0],
+          coordinates: [latitude.current, longitude.current],
         },
       });
 
