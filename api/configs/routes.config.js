@@ -6,7 +6,7 @@ const users = require("../controllers/users.controller");
 const auth = require("../middlewares/auth.middleware");
 
 router.post("/restaurants", restaurants.create);
-router.get("/restaurants", restaurants.list);
+router.get("/restaurants", auth.checkAuth, restaurants.list);
 router.get("/restaurants/:id", restaurants.detail);
 router.patch("/restaurants/:id", restaurants.update);
 router.delete("/restaurants/:id", restaurants.delete);

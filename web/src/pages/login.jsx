@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { login } from "../services/api.service";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -13,11 +15,9 @@ function Login() {
 
   async function onSubmit(data) {
     try {
-      const response = await login(data);
+      await login(data);
 
-      console.log(response.data.accessToken);
-
-      setError(false);
+      navigate("/");
     } catch (err) {
       setError(true);
     }
@@ -56,7 +56,7 @@ function Login() {
       </div>
 
       <button type="submit" className="btn btn-success">
-        Register
+        Login
       </button>
     </form>
   );

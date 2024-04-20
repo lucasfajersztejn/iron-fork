@@ -27,7 +27,7 @@ module.exports.login = (req, res, next) => {
               const accessToken = jwt.sign(
                 {
                   sub: user.id,
-                  exp: Date.now() / 1000 + 20,
+                  exp: Date.now() / 1000 + 3600,
                 },
                 process.env.JWT_SECRET
               );

@@ -7,6 +7,7 @@ function Register() {
   const navigate = useNavigate();
   const latitude = useRef(0);
   const longitude = useRef(0);
+  const ref = useRef(null);
 
   const {
     register,
@@ -17,6 +18,7 @@ function Register() {
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition((position) => {
+      console.log(ref.current);
       latitude.current = position.coords.latitude;
       longitude.current = position.coords.longitude;
     });
