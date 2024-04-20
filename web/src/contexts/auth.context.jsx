@@ -11,6 +11,7 @@ export function AuthContextProvider({ children }) {
     setUser(response.data);
   }
 
+
   useEffect(() => {
     fetchProfile();
   }, []);
@@ -23,6 +24,7 @@ export function AuthContextProvider({ children }) {
   const value = {
     user,
     doLogin,
+    setUser
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

@@ -44,3 +44,4 @@ export function getProfile() {
 export function getRestaurants() {
   return http.get("/restaurants");
 }
+

@@ -8,16 +8,16 @@ import Login from "./pages/login";
 function App() {
   return (
     <>
-      <Navbar />
+        <Navbar setUser={setUser} />
 
-      <main className="container">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/restaurants/:id" element={<Restaurant />} />
-        </Routes>
-      </main>
+        <main className="container">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/restaurants/:id" element={<Restaurant />} />
+          </Routes>
+        </main>
     </>
   );
 }
