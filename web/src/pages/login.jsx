@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
-import { login } from "../services/api.service";
 import { useNavigate } from "react-router-dom";
+import AuthContext from "../contexts/auth.context";
 
 function Login() {
   const navigate = useNavigate();
+  const { doLogin } = useContext(AuthContext);
+
   const {
     register,
     handleSubmit,
@@ -15,7 +17,7 @@ function Login() {
 
   async function onSubmit(data) {
     try {
-      await login(data);
+      await doLogin(data);
 
       navigate("/");
     } catch (err) {

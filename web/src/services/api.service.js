@@ -37,6 +37,10 @@ export function login(data) {
   });
 }
 
+export function getProfile() {
+  return http.get("/profile");
+}
+
 export function getRestaurants() {
   return http.get("/restaurants");
 }

@@ -14,6 +14,7 @@ router.delete("/restaurants/:id", restaurants.delete);
 router.post("/restaurants/:id/comments", auth.checkAuth, comments.create);
 router.get("/restaurants/:id/comments", comments.list);
 
+router.get("/profile", auth.checkAuth, users.profile);
 router.post("/users", users.create);
 router.post("/login", users.login);
 
